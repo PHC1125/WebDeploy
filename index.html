@@ -69,9 +69,9 @@
             display: flex;
             align-items: center;
             margin: 1rem 0;
-            padding: 1rem;
+            padding: 1.5rem;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            border-radius: 12px;
             transition: all 0.3s ease;
         }
 
@@ -80,8 +80,28 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
+        .item-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 1.5rem;
+            font-size: 1.5rem;
+            color: #4a90e2;
+            transition: all 0.3s ease;
+        }
+
+        .item:hover .item-icon {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
         .item-name {
             flex: 1;
+            font-size: 1.1rem;
         }
 
         .ranking-input {
@@ -93,13 +113,17 @@
             color: #fff;
             text-align: center;
             margin-right: 1rem;
+            font-size: 1.1rem;
         }
 
         .nasa-rank {
-            width: 60px;
+            width: 80px;
             text-align: center;
             opacity: 0;
             transition: opacity 0.5s ease;
+            background: rgba(74, 144, 226, 0.2);
+            padding: 0.5rem;
+            border-radius: 4px;
         }
 
         .reasoning {
@@ -107,6 +131,10 @@
             margin-left: 1rem;
             font-style: italic;
             color: #aaa;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-top: 1rem;
         }
 
         button {
@@ -132,13 +160,17 @@
             font-size: 1.2rem;
             margin-top: 2rem;
             display: none;
+            padding: 2rem;
+            background: rgba(74, 144, 226, 0.1);
+            border-radius: 12px;
         }
 
         .score {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: #4a90e2;
             margin: 1rem 0;
+            text-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
         }
 
         @keyframes twinkle {
@@ -157,6 +189,10 @@
                 text-align: center;
             }
 
+            .item-icon {
+                margin: 0 0 1rem 0;
+            }
+
             .ranking-input {
                 margin: 1rem 0;
             }
@@ -170,11 +206,11 @@
 <body>
     <div class="stars"></div>
     <div class="container">
-        <h1>NASA Moon Survival Exercise</h1>
+        <h1><i class="fas fa-moon"></i> NASA Moon Survival Exercise</h1>
         
         <div class="glass-card">
             <div class="scenario">
-                <h2>Scenario:</h2>
+                <h2><i class="fas fa-info-circle"></i> Scenario:</h2>
                 <p>You are a member of a space crew originally scheduled to rendezvous with a mother ship on the lighted surface of the moon. Due to mechanical difficulties, your ship was forced to land 200 miles from the rendezvous point. Many items were damaged during landing. Your task is to rank the remaining 15 items based on their importance for the 200-mile journey to the mother ship.</p>
                 <p>Rank items from 1 (most important) to 15 (least important).</p>
             </div>
@@ -183,34 +219,34 @@
                 <!-- Items will be populated by JavaScript -->
             </ul>
 
-            <button id="calculateBtn">Calculate Score</button>
+            <button id="calculateBtn"><i class="fas fa-calculator"></i> Calculate Score</button>
 
             <div class="result" id="result">
-                <h2>Your Score</h2>
+                <h2><i class="fas fa-star"></i> Your Score</h2>
                 <div class="score" id="score"></div>
                 <div id="category"></div>
-                <p>Click any item to see NASA's reasoning!</p>
+                <p><i class="fas fa-info-circle"></i> Click any item to see NASA's reasoning!</p>
             </div>
         </div>
     </div>
 
     <script>
         const items = [
-            { name: "Box of matches", nasaRank: 15, reasoning: "Virtually worthless -- there's no oxygen on the moon to sustain combustion" },
-            { name: "Food concentrate", nasaRank: 4, reasoning: "Efficient means of supplying energy requirements" },
-            { name: "50 feet of nylon rope", nasaRank: 6, reasoning: "Useful in scaling cliffs and tying injured together" },
-            { name: "Parachute silk", nasaRank: 8, reasoning: "Protection from the sun's rays" },
-            { name: "Portable heating unit", nasaRank: 13, reasoning: "Not needed unless on the dark side" },
-            { name: "Two .45 caliber pistols", nasaRank: 11, reasoning: "Possible means of self-propulsion" },
-            { name: "One case of dehydrated milk", nasaRank: 12, reasoning: "Bulkier duplication of food concentrate" },
-            { name: "Two 100 lb. tanks of oxygen", nasaRank: 1, reasoning: "Most pressing survival need" },
-            { name: "Stellar map", nasaRank: 3, reasoning: "Primary means of navigation" },
-            { name: "Self-inflating life raft", nasaRank: 9, reasoning: "CO2 bottle may be used for propulsion" },
-            { name: "Magnetic compass", nasaRank: 14, reasoning: "The magnetic field on the moon is not polarized" },
-            { name: "20 liters of water", nasaRank: 2, reasoning: "Needed for replacement of tremendous liquid loss" },
-            { name: "Signal flares", nasaRank: 10, reasoning: "Use as distress signal when mother ship is sighted" },
-            { name: "First aid kit with injection needle", nasaRank: 7, reasoning: "Needles for vitamins, medicines, etc." },
-            { name: "Solar-powered FM receiver-transmitter", nasaRank: 5, reasoning: "For communication with mother ship" }
+            { name: "Box of matches", icon: "fas fa-fire", nasaRank: 15, reasoning: "Virtually worthless -- there's no oxygen on the moon to sustain combustion" },
+            { name: "Food concentrate", icon: "fas fa-hamburger", nasaRank: 4, reasoning: "Efficient means of supplying energy requirements" },
+            { name: "50 feet of nylon rope", icon: "fas fa-link", nasaRank: 6, reasoning: "Useful in scaling cliffs and tying injured together" },
+            { name: "Parachute silk", icon: "fas fa-wind", nasaRank: 8, reasoning: "Protection from the sun's rays" },
+            { name: "Portable heating unit", icon: "fas fa-temperature-high", nasaRank: 13, reasoning: "Not needed unless on the dark side" },
+            { name: "Two .45 caliber pistols", icon: "fas fa-fighter-jet", nasaRank: 11, reasoning: "Possible means of self-propulsion" },
+            { name: "One case of dehydrated milk", icon: "fas fa-glass-milk", nasaRank: 12, reasoning: "Bulkier duplication of food concentrate" },
+            { name: "Two 100 lb. tanks of oxygen", icon: "fas fa-lungs", nasaRank: 1, reasoning: "Most pressing survival need" },
+            { name: "Stellar map", icon: "fas fa-map-marked-alt", nasaRank: 3, reasoning: "Primary means of navigation" },
+            { name: "Self-inflating life raft", icon: "fas fa-ship", nasaRank: 9, reasoning: "CO2 bottle may be used for propulsion" },
+            { name: "Magnetic compass", icon: "fas fa-compass", nasaRank: 14, reasoning: "The magnetic field on the moon is not polarized" },
+            { name: "20 liters of water", icon: "fas fa-tint", nasaRank: 2, reasoning: "Needed for replacement of tremendous liquid loss" },
+            { name: "Signal flares", icon: "fas fa-meteor", nasaRank: 10, reasoning: "Use as distress signal when mother ship is sighted" },
+            { name: "First aid kit with injection needle", icon: "fas fa-briefcase-medical", nasaRank: 7, reasoning: "Needles for vitamins, medicines, etc." },
+            { name: "Solar-powered FM receiver-transmitter", icon: "fas fa-satellite-dish", nasaRank: 5, reasoning: "For communication with mother ship" }
         ];
 
         // Create stars background
@@ -237,10 +273,13 @@
                 const li = document.createElement('li');
                 li.className = 'item';
                 li.innerHTML = `
+                    <div class="item-icon">
+                        <i class="${item.icon}"></i>
+                    </div>
                     <span class="item-name">${item.name}</span>
                     <input type="number" class="ranking-input" min="1" max="15" placeholder="Rank">
                     <span class="nasa-rank">NASA: ${item.nasaRank}</span>
-                    <span class="reasoning">${item.reasoning}</span>
+                    <div class="reasoning">${item.reasoning}</div>
                 `;
                 itemsList.appendChild(li);
             });
@@ -291,12 +330,12 @@
             scoreElement.textContent = totalDiff;
 
             let category;
-            if (totalDiff <= 25) category = "Excellent! You would survive on the moon!";
-            else if (totalDiff <= 32) category = "Good! You have strong survival instincts!";
-            else if (totalDiff <= 45) category = "Average. More training needed.";
-            else if (totalDiff <= 55) category = "Fair. Consider studying space survival.";
-            else if (totalDiff <= 70) category = "Poor. You're using Earth-bound logic.";
-            else category = "Very poor. You're a casualty of the space program!";
+            if (totalDiff <= 25) category = "🏆 Excellent! You would survive on the moon!";
+            else if (totalDiff <= 32) category = "🌟 Good! You have strong survival instincts!";
+            else if (totalDiff <= 45) category = "🌙 Average. More training needed.";
+            else if (totalDiff <= 55) category = "⚠️ Fair. Consider studying space survival.";
+            else if (totalDiff <= 70) category = "❗ Poor. You're using Earth-bound logic.";
+            else category = "💀 Very poor. You're a casualty of the space program!";
 
             categoryElement.textContent = category;
         }
