@@ -1,109 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NASA Survival Exercise</title>
-<style>
-  body {
-    background-color: #1a1a2e;
-    color: #e7e7de;
-    font-family: 'Orbitron', sans-serif;
-    margin: 0;
-    padding: 20px;
-    font-size: 16px;
-  }
-  h1 {
-    color: #00dbd8;
-    font-size: 24px;
-  }
-  p {
-    color: #e7e7de;
-  }
-  label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-  input {
-    width: 50px;
-    padding: 5px;
-    margin-right: 10px;
-    background-color: #0f3460;
-    border: 1px solid #4ecca3;
-    color: #e7e7de;
-    font-size: 16px;
-  }
-  .item {
-    margin-bottom: 15px;
-  }
-  .button {
-    background-color: #0f3460;
-    color: #00dbd8;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  .button:hover {
-    background-color: #4ecca3;
-    color: #1a1a2e;
-  }
-  #results {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #16213e;
-    border-left: 5px solid #00dbd8;
-  }
-  @import url('https://fonts.googleapis.com/css?family=Orbitron&display=swap');
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Moon Survival Exercise</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #0a0a2a;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .scenario {
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .items-list {
+            list-style: none;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .item-name {
+            flex: 1;
+        }
+
+        .ranking-input {
+            width: 60px;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-align: center;
+            margin-right: 1rem;
+        }
+
+        .nasa-rank {
+            width: 60px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .reasoning {
+            display: none;
+            margin-left: 1rem;
+            font-style: italic;
+            color: #aaa;
+        }
+
+        button {
+            display: block;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #4a90e2, #67b26f);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(74, 144, 226, 0.5);
+        }
+
+        .result {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4a90e2;
+            margin: 1rem 0;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .ranking-input {
+                margin: 1rem 0;
+            }
+
+            .reasoning {
+                margin: 1rem 0 0 0;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1>NASA Exercise: Survival on the Moon</h1>
-<p>Your task is to rank the items in order of importance for survival. Your score will be calculated based on the accuracy of your rankings compared to NASA's expert rankings.</p>
+    <div class="stars"></div>
+    <div class="container">
+        <h1>NASA Moon Survival Exercise</h1>
+        
+        <div class="glass-card">
+            <div class="scenario">
+                <h2>Scenario:</h2>
+                <p>You are a member of a space crew originally scheduled to rendezvous with a mother ship on the lighted surface of the moon. Due to mechanical difficulties, your ship was forced to land 200 miles from the rendezvous point. Many items were damaged during landing. Your task is to rank the remaining 15 items based on their importance for the 200-mile journey to the mother ship.</p>
+                <p>Rank items from 1 (most important) to 15 (least important).</p>
+            </div>
 
-<form id="rankingForm">
-  <div class="item"><label>Box of matches: <input type="number" min="1" max="15" required name="matches"></label></div>
-  <div class="item"><label>Food concentrate: <input type="number" min="1" max="15" required name="food"></label></div>
-  <div class="item"><label>50 feet of nylon rope: <input type="number" min="1" max="15" required name="rope"></label></div>
-  <div class="item"><label>Parachute silk: <input type="number" min="1" max="15" required name="parachute"></label></div>
-  <div class="item"><label>Portable heating unit: <input type="number" min="1" max="15" required name="heater"></label></div>
-  <div class="item"><label>Two .45 caliber pistols: <input type="number" min="1" max="15" required name="pistols"></label></div>
-  <div class="item"><label>One case of dehydrated milk: <input type="number" min="1" max="15" required name="milk"></label></div>
-  <div class="item"><label>Two 100 lb. tanks of oxygen: <input type="number" min="1" max="15" required name="oxygen"></label></div>
-  <div class="item"><label>Stellar map: <input type="number" min="1" max="15" required name="map"></label></div>
-  <div class="item"><label>Self-inflating life raft: <input type="number" min="1" max="15" required name="raft"></label></div>
-  <div class="item"><label>Magnetic compass: <input type="number" min="1" max="15" required name="compass"></label></div>
-  <div class="item"><label>20 liters of water: <input type="number" min="1" max="15" required name="water"></label></div>
-  <div class="item"><label>Signal flares: <input type="number" min="1" max="15" required name="flares"></label></div>
-  <div class="item"><label>First aid kit, including injection needle: <input type="number" min="1" max="15" required name="firstaid"></label></div>
-  <div class="item"><label>Solar-powered FM receiver-transmitter: <input type="number" min="1" max="15" required name="radio"></label></div>
-  <button type="button" onclick="calculateScore()" class="button">Calculate Score</button>
-</form>
+            <ul class="items-list" id="itemsList">
+                <!-- Items will be populated by JavaScript -->
+            </ul>
 
-<div id="results"></div>
+            <button id="calculateBtn">Calculate Score</button>
 
-<script>
-  function calculateScore() {
-    const nasaRankings = {matches: 15, food: 4, rope: 6, parachute: 8, heater: 13, pistols: 11, milk: 12, oxygen: 1, map: 3, raft: 9, compass: 14, water: 2, flares: 10, firstaid: 7, radio: 5};
-    const form = document.forms['rankingForm'];
-    let score = 0;
+            <div class="result" id="result">
+                <h2>Your Score</h2>
+                <div class="score" id="score"></div>
+                <div id="category"></div>
+                <p>Click any item to see NASA's reasoning!</p>
+            </div>
+        </div>
+    </div>
 
-    for (let item in nasaRankings) {
-      const userRank = parseInt(form[item].value);
-      score += Math.abs(nasaRankings[item] - userRank);
-    }
+    <script>
+        const items = [
+            { name: "Box of matches", nasaRank: 15, reasoning: "Virtually worthless -- there's no oxygen on the moon to sustain combustion" },
+            { name: "Food concentrate", nasaRank: 4, reasoning: "Efficient means of supplying energy requirements" },
+            { name: "50 feet of nylon rope", nasaRank: 6, reasoning: "Useful in scaling cliffs and tying injured together" },
+            { name: "Parachute silk", nasaRank: 8, reasoning: "Protection from the sun's rays" },
+            { name: "Portable heating unit", nasaRank: 13, reasoning: "Not needed unless on the dark side" },
+            { name: "Two .45 caliber pistols", nasaRank: 11, reasoning: "Possible means of self-propulsion" },
+            { name: "One case of dehydrated milk", nasaRank: 12, reasoning: "Bulkier duplication of food concentrate" },
+            { name: "Two 100 lb. tanks of oxygen", nasaRank: 1, reasoning: "Most pressing survival need" },
+            { name: "Stellar map", nasaRank: 3, reasoning: "Primary means of navigation" },
+            { name: "Self-inflating life raft", nasaRank: 9, reasoning: "CO2 bottle may be used for propulsion" },
+            { name: "Magnetic compass", nasaRank: 14, reasoning: "The magnetic field on the moon is not polarized" },
+            { name: "20 liters of water", nasaRank: 2, reasoning: "Needed for replacement of tremendous liquid loss" },
+            { name: "Signal flares", nasaRank: 10, reasoning: "Use as distress signal when mother ship is sighted" },
+            { name: "First aid kit with injection needle", nasaRank: 7, reasoning: "Needles for vitamins, medicines, etc." },
+            { name: "Solar-powered FM receiver-transmitter", nasaRank: 5, reasoning: "For communication with mother ship" }
+        ];
 
-    let scoreMessage = "Your total score is: " + score + ". ";
-    if (score <= 25) scoreMessage += "Excellent!";
-    else if (score <= 32) scoreMessage += "Good!";
-    else if (score <= 45) scoreMessage += "Average.";
-    else if (score <= 55) scoreMessage += "Fair.";
-    else if (score <= 70) scoreMessage += "Poor.";
-    else scoreMessage += "Very poor – you’re one of the casualties of the space program!";
+        // Create stars background
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.backgroundColor = '#fff';
+                star.style.borderRadius = '50%';
+                star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite`;
+                starsContainer.appendChild(star);
+            }
+        }
 
-    document.getElementById('results').innerHTML = scoreMessage;
-  }
-</script>
+        // Populate items list
+        function populateItems() {
+            const itemsList = document.getElementById('itemsList');
+            items.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = 'item';
+                li.innerHTML = `
+                    <span class="item-name">${item.name}</span>
+                    <input type="number" class="ranking-input" min="1" max="15" placeholder="Rank">
+                    <span class="nasa-rank">NASA: ${item.nasaRank}</span>
+                    <span class="reasoning">${item.reasoning}</span>
+                `;
+                itemsList.appendChild(li);
+            });
+        }
+
+        // Calculate score
+        function calculateScore() {
+            const inputs = document.querySelectorAll('.ranking-input');
+            let totalDiff = 0;
+            let valid = true;
+            const usedRanks = new Set();
+
+            inputs.forEach((input, index) => {
+                const rank = parseInt(input.value);
+                if (isNaN(rank) || rank < 1 || rank > 15 || usedRanks.has(rank)) {
+                    valid = false;
+                    return;
+                }
+                usedRanks.add(rank);
+                totalDiff += Math.abs(rank - items[index].nasaRank);
+            });
+
+            if (!valid || usedRanks.size !== 15) {
+                alert('Please enter valid rankings (1-15) with no duplicates.');
+                return;
+            }
+
+            // Show NASA rankings
+            document.querySelectorAll('.nasa-rank').forEach(span => {
+                span.style.opacity = '1';
+            });
+
+            // Enable reasoning display
+            document.querySelectorAll('.item').forEach(item => {
+                item.style.cursor = 'pointer';
+                item.addEventListener('click', function() {
+                    const reasoning = this.querySelector('.reasoning');
+                    reasoning.style.display = reasoning.style.display === 'none' ? 'block' : 'none';
+                });
+            });
+
+            // Show result
+            const result = document.getElementById('result');
+            const scoreElement = document.getElementById('score');
+            const categoryElement = document.getElementById('category');
+            
+            result.style.display = 'block';
+            scoreElement.textContent = totalDiff;
+
+            let category;
+            if (totalDiff <= 25) category = "Excellent! You would survive on the moon!";
+            else if (totalDiff <= 32) category = "Good! You have strong survival instincts!";
+            else if (totalDiff <= 45) category = "Average. More training needed.";
+            else if (totalDiff <= 55) category = "Fair. Consider studying space survival.";
+            else if (totalDiff <= 70) category = "Poor. You're using Earth-bound logic.";
+            else category = "Very poor. You're a casualty of the space program!";
+
+            categoryElement.textContent = category;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            populateItems();
+            document.getElementById('calculateBtn').addEventListener('click', calculateScore);
+        });
+    </script>
 </body>
 </html>
