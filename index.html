@@ -3,349 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survival on the Moon</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>MEDD 8999: Get Your Hands Dirty</title>
     <style>
-        * {
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
         }
 
-        body {
-            background: #0a0a2a;
+        header {
+            background-color: #0078D7;
             color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1rem;
+            font-style: italic;
         }
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        }
-
-        h1 {
-            text-align: center;
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        .scenario {
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .items-list {
-            list-style: none;
-        }
-
-        .item {
-            display: flex;
-            align-items: center;
-            margin: 1rem 0;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .item:hover {
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .item-icon {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            margin-right: 1.5rem;
-            font-size: 1.5rem;
-            color: #4a90e2;
-            transition: all 0.3s ease;
-        }
-
-        .item:hover .item-icon {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
-        }
-
-        .item-name {
-            flex: 1;
-            font-size: 1.1rem;
-        }
-
-        .ranking-input {
-            width: 60px;
-            padding: 0.5rem;
-            border: none;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            text-align: center;
-            margin-right: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .nasa-rank {
-            width: 80px;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            background: rgba(74, 144, 226, 0.2);
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-
-        .reasoning {
-            display: none;
-            margin-left: 1rem;
-            font-style: italic;
-            color: #aaa;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
             border-radius: 8px;
-            margin-top: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        button {
-            display: block;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
-            background: linear-gradient(45deg, #4a90e2, #67b26f);
-            border: none;
-            border-radius: 25px;
-            color: white;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        section {
+            margin-bottom: 30px;
         }
 
-        button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(74, 144, 226, 0.5);
+        section h2 {
+            color: #0078D7;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
 
-        .result {
-            text-align: center;
+        section h3 {
+            color: #555;
             font-size: 1.2rem;
-            margin-top: 2rem;
-            display: none;
-            padding: 2rem;
-            background: rgba(74, 144, 226, 0.1);
-            border-radius: 12px;
+            margin-bottom: 10px;
         }
 
-        .score {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #4a90e2;
-            margin: 1rem 0;
-            text-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+        .outline {
+            list-style: none;
+            padding: 0;
         }
 
-        @keyframes twinkle {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+        .outline li {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
+        .outline li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
-            .item {
-                flex-direction: column;
-                text-align: center;
-            }
+        .outline li h4 {
+            color: #0078D7;
+            margin: 0 0 5px;
+        }
 
-            .item-icon {
-                margin: 0 0 1rem 0;
-            }
+        .outline li p {
+            margin: 5px 0 10px;
+        }
 
-            .ranking-input {
-                margin: 1rem 0;
-            }
+        .outline li ul {
+            list-style: disc;
+            margin: 10px 0 0 20px;
+        }
 
-            .reasoning {
-                margin: 1rem 0 0 0;
-            }
+        .deliverables {
+            background-color: #e9f7ff;
+            padding: 15px;
+            border-left: 5px solid #0078D7;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #0078D7;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
+    <header>
+        <h1>MEDD 8999: Get Your Hands Dirty</h1>
+        <p>A Practical Approach to STEM Education</p>
+    </header>
     <div class="container">
-        <h1><i class="fas fa-moon"></i>Survival on the Moon by PHC1125</h1>
-        
-        <div class="glass-card">
-            <div class="scenario">
-                <h2><i class="fas fa-info-circle"></i> Scenario:</h2>
-                <p>You are a member of a space crew originally scheduled to rendezvous with a mother ship on the lighted surface of the moon. Due to mechanical difficulties, your ship was forced to land 200 miles from the rendezvous point. Many items were damaged during landing. Your task is to rank the remaining 15 items based on their importance for the 200-mile journey to the mother ship.</p>
-                <p>Rank items from 1 (most important) to 15 (least important).</p>
-            </div>
-
-            <ul class="items-list" id="itemsList">
-                <!-- Items will be populated by JavaScript -->
+        <section>
+            <h2>Course Outline</h2>
+            <ul class="outline">
+                <li>
+                    <h4>Class 1 & 2: Hardware Electronics with Arduino and Micro:bit</h4>
+                    <p><strong>Objective:</strong> Learn the basics of microcontroller programming and build simple hardware projects.</p>
+                    <p><strong>Subtopics:</strong></p>
+                    <ul>
+                        <li>Introduction to microcontrollers: Arduino vs. Micro:bit</li>
+                        <li>Basic electronics and Input/Output basics (LEDs, buttons, sensors)</li>
+                        <li>Sensors and actuators, Serial Monitor, and Bluetooth communication</li>
+                        <li>Debugging hardware and troubleshooting</li>
+                    </ul>
+                    <p><strong>Project:</strong> Build a temperature-controlled fan with Arduino OR a step counter using Micro:bit.</p>
+                </li>
+                <li>
+                    <h4>Class 3 & 4: App Design with MIT App Inventor</h4>
+                    <p><strong>Objective:</strong> Design simple mobile applications with functionality and interactivity.</p>
+                    <p><strong>Subtopics:</strong></p>
+                    <ul>
+                        <li>Introduction to MIT App Inventor and event-driven programming</li>
+                        <li>Building user interfaces: Buttons, labels, and layouts</li>
+                        <li>Using sensors like GPS and accelerometer</li>
+                        <li>Data storage: TinyDB for saving app data</li>
+                    </ul>
+                    <p><strong>Project:</strong> Create a "Pedometer App" OR a "Weather App".</p>
+                </li>
+                <li>
+                    <h4>Class 5 & 6: Software Programming with Scratch</h4>
+                    <p><strong>Objective:</strong> Explore visual programming to teach computational thinking.</p>
+                    <p><strong>Subtopics:</strong></p>
+                    <ul>
+                        <li>Introduction to Scratch: Loops, conditionals, and variables</li>
+                        <li>Creating animations and interactive stories</li>
+                        <li>Advanced Scratch: Lists, broadcasting, and cloning</li>
+                        <li>Optional: Connecting Scratch to Micro:bit</li>
+                    </ul>
+                    <p><strong>Project:</strong> Develop an interactive game like a maze or quiz game.</p>
+                </li>
+                <li>
+                    <h4>Class 7 & 8: 3D Modeling for Printing and VR</h4>
+                    <p><strong>Objective:</strong> Use 3D modeling tools to create printable objects and virtual environments.</p>
+                    <p><strong>Subtopics:</strong></p>
+                    <ul>
+                        <li>Introduction to 3D modeling with Tinkercad</li>
+                        <li>Design principles for 3D printing</li>
+                        <li>Creating virtual environments with CoSpaces</li>
+                        <li>Applications of 3D printing and VR in STEM education</li>
+                    </ul>
+                    <p><strong>Project:</strong> Design a 3D object (e.g., keychain) AND create a virtual classroom in CoSpaces.</p>
+                </li>
             </ul>
-
-            <button id="calculateBtn"><i class="fas fa-calculator"></i> Calculate Score</button>
-
-            <div class="result" id="result">
-                <h2><i class="fas fa-star"></i> Your Score</h2>
-                <div class="score" id="score"></div>
-                <div id="category"></div>
-                <p><i class="fas fa-info-circle"></i> Click any item to see NASA's reasoning!</p>
+        </section>
+        <section>
+            <h2>Course Deliverables</h2>
+            <div class="deliverables">
+                <ul>
+                    <li><strong>Projects:</strong> Complete four hands-on projects (one for each topic).</li>
+                    <li><strong>Reflection:</strong> Write reflections on how these tools can be used in classrooms.</li>
+                    <li><strong>Final Portfolio:</strong> Compile all projects, code, and designs into a final portfolio.</li>
+                </ul>
             </div>
-        </div>
+        </section>
     </div>
-
-    <script>
-        const items = [
-            { name: "Box of matches", icon: "fas fa-fire", nasaRank: 15, reasoning: "Virtually worthless -- there's no oxygen on the moon to sustain combustion" },
-            { name: "Food concentrate", icon: "fas fa-hamburger", nasaRank: 4, reasoning: "Efficient means of supplying energy requirements" },
-            { name: "50 feet of nylon rope", icon: "fas fa-link", nasaRank: 6, reasoning: "Useful in scaling cliffs and tying injured together" },
-            { name: "Parachute silk", icon: "fas fa-wind", nasaRank: 8, reasoning: "Protection from the sun's rays" },
-            { name: "Portable heating unit", icon: "fas fa-temperature-high", nasaRank: 13, reasoning: "Not needed unless on the dark side" },
-            { name: "Two .45 caliber pistols", icon: "fas fa-fighter-jet", nasaRank: 11, reasoning: "Possible means of self-propulsion" },
-            { name: "One case of dehydrated milk", icon: "fas fa-glass-milk", nasaRank: 12, reasoning: "Bulkier duplication of food concentrate" },
-            { name: "Two 100 lb. tanks of oxygen", icon: "fas fa-lungs", nasaRank: 1, reasoning: "Most pressing survival need" },
-            { name: "Stellar map", icon: "fas fa-map-marked-alt", nasaRank: 3, reasoning: "Primary means of navigation" },
-            { name: "Self-inflating life raft", icon: "fas fa-ship", nasaRank: 9, reasoning: "CO2 bottle may be used for propulsion" },
-            { name: "Magnetic compass", icon: "fas fa-compass", nasaRank: 14, reasoning: "The magnetic field on the moon is not polarized" },
-            { name: "20 liters of water", icon: "fas fa-tint", nasaRank: 2, reasoning: "Needed for replacement of tremendous liquid loss" },
-            { name: "Signal flares", icon: "fas fa-meteor", nasaRank: 10, reasoning: "Use as distress signal when mother ship is sighted" },
-            { name: "First aid kit with injection needle", icon: "fas fa-briefcase-medical", nasaRank: 7, reasoning: "Needles for vitamins, medicines, etc." },
-            { name: "Solar-powered FM receiver-transmitter", icon: "fas fa-satellite-dish", nasaRank: 5, reasoning: "For communication with mother ship" }
-        ];
-
-        // Create stars background
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            for (let i = 0; i < 200; i++) {
-                const star = document.createElement('div');
-                star.style.position = 'absolute';
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.width = `${Math.random() * 3}px`;
-                star.style.height = star.style.width;
-                star.style.backgroundColor = '#fff';
-                star.style.borderRadius = '50%';
-                star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite`;
-                starsContainer.appendChild(star);
-            }
-        }
-
-        // Populate items list
-        function populateItems() {
-            const itemsList = document.getElementById('itemsList');
-            items.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.className = 'item';
-                li.innerHTML = `
-                    <div class="item-icon">
-                        <i class="${item.icon}"></i>
-                    </div>
-                    <span class="item-name">${item.name}</span>
-                    <input type="number" class="ranking-input" min="1" max="15" placeholder="Rank">
-                    <span class="nasa-rank">NASA: ${item.nasaRank}</span>
-                    <div class="reasoning">${item.reasoning}</div>
-                `;
-                itemsList.appendChild(li);
-            });
-        }
-
-        // Calculate score
-        function calculateScore() {
-            const inputs = document.querySelectorAll('.ranking-input');
-            let totalDiff = 0;
-            let valid = true;
-            const usedRanks = new Set();
-
-            inputs.forEach((input, index) => {
-                const rank = parseInt(input.value);
-                if (isNaN(rank) || rank < 1 || rank > 15 || usedRanks.has(rank)) {
-                    valid = false;
-                    return;
-                }
-                usedRanks.add(rank);
-                totalDiff += Math.abs(rank - items[index].nasaRank);
-            });
-
-            if (!valid || usedRanks.size !== 15) {
-                alert('Please enter valid rankings (1-15) with no duplicates.');
-                return;
-            }
-
-            // Show NASA rankings
-            document.querySelectorAll('.nasa-rank').forEach(span => {
-                span.style.opacity = '1';
-            });
-
-            // Enable reasoning display
-            document.querySelectorAll('.item').forEach(item => {
-                item.style.cursor = 'pointer';
-                item.addEventListener('click', function() {
-                    const reasoning = this.querySelector('.reasoning');
-                    reasoning.style.display = reasoning.style.display === 'none' ? 'block' : 'none';
-                });
-            });
-
-            // Show result
-            const result = document.getElementById('result');
-            const scoreElement = document.getElementById('score');
-            const categoryElement = document.getElementById('category');
-            
-            result.style.display = 'block';
-            scoreElement.textContent = totalDiff;
-
-            let category;
-            if (totalDiff <= 25) category = "🏆 Excellent! You would survive on the moon!";
-            else if (totalDiff <= 32) category = "🌟 Good! You have strong survival instincts!";
-            else if (totalDiff <= 45) category = "🌙 Average. More training needed.";
-            else if (totalDiff <= 55) category = "⚠️ Fair. Consider studying space survival.";
-            else if (totalDiff <= 70) category = "❗ Poor. You're using Earth-bound logic.";
-            else category = "💀 Very poor. You're a casualty of the space program!";
-
-            categoryElement.textContent = category;
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            createStars();
-            populateItems();
-            document.getElementById('calculateBtn').addEventListener('click', calculateScore);
-        });
-    </script>
+    <footer>
+        &copy; 2024 MEDD 8999 | Master of Education Program
+    </footer>
 </body>
 </html>
