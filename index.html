@@ -1,186 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEDD 8999: Get Your Hands Dirty</title>
     <style>
-        /* General Styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: #0078D7;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-
-        header p {
-            margin: 5px 0 0;
-            font-size: 1rem;
-            font-style: italic;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        section {
-            margin-bottom: 30px;
-        }
-
-        section h2 {
-            color: #0078D7;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        section h3 {
-            color: #555;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .outline {
-            list-style: none;
-            padding: 0;
-        }
-
-        .outline li {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .outline li:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .outline li h4 {
-            color: #0078D7;
-            margin: 0 0 5px;
-        }
-
-        .outline li p {
-            margin: 5px 0 10px;
-        }
-
-        .outline li ul {
-            list-style: disc;
-            margin: 10px 0 0 20px;
-        }
-
-        .deliverables {
-            background-color: #e9f7ff;
-            padding: 15px;
-            border-left: 5px solid #0078D7;
-            border-radius: 5px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #0078D7;
-            color: #fff;
-            font-size: 0.9rem;
-            margin-top: 30px;
+        /* Customize the position of the floating entrance */
+        #position_demo {
+            position: absolute;
+            right: 10px;
+            bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>MEDD 8999: Get Your Hands Dirty</h1>
-        <p>A Practical Approach to STEM Education</p>
-    </header>
-    <div class="container">
-        <section>
-            <h2>Course Outline</h2>
-            <ul class="outline">
-                <li>
-                    <h4>Class 1 & 2: Hardware Electronics with Arduino and Micro:bit</h4>
-                    <p><strong>Objective:</strong> Learn the basics of microcontroller programming and build simple hardware projects.</p>
-                    <p><strong>Subtopics:</strong></p>
-                    <ul>
-                        <li>Introduction to microcontrollers: Arduino vs. Micro:bit</li>
-                        <li>Basic electronics and Input/Output basics (LEDs, buttons, sensors)</li>
-                        <li>Sensors and actuators, Serial Monitor, and Bluetooth communication</li>
-                        <li>Debugging hardware and troubleshooting</li>
-                    </ul>
-                    <p><strong>Project:</strong> Build a temperature-controlled fan with Arduino OR a step counter using Micro:bit.</p>
-                </li>
-                <li>
-                    <h4>Class 3 & 4: App Design with MIT App Inventor</h4>
-                    <p><strong>Objective:</strong> Design simple mobile applications with functionality and interactivity.</p>
-                    <p><strong>Subtopics:</strong></p>
-                    <ul>
-                        <li>Introduction to MIT App Inventor and event-driven programming</li>
-                        <li>Building user interfaces: Buttons, labels, and layouts</li>
-                        <li>Using sensors like GPS and accelerometer</li>
-                        <li>Data storage: TinyDB for saving app data</li>
-                    </ul>
-                    <p><strong>Project:</strong> Create a "an App for checking weather".</p>
-                </li>
-                <li>
-                    <h4>Class 5 & 6: Software Programming with Scratch</h4>
-                    <p><strong>Objective:</strong> Explore visual programming to teach computational thinking.</p>
-                    <p><strong>Subtopics:</strong></p>
-                    <ul>
-                        <li>Introduction to Scratch: Loops, conditionals, and variables</li>
-                        <li>Creating animations and interactive stories</li>
-                        <li>Advanced Scratch: Lists, broadcasting, and cloning</li>
-                        <li>Optional: Interfacing Scratch to Micro:bit</li>
-                    </ul>
-                    <p><strong>Project:</strong> Develop an interactive game like a maze or quiz game.</p>
-                </li>
-                <li>
-                    <h4>Class 7 & 8: 3D Modeling for Printing and VR</h4>
-                    <p><strong>Objective:</strong> Use 3D modeling tools to create printable objects and virtual environments.</p>
-                    <p><strong>Subtopics:</strong></p>
-                    <ul>
-                        <li>Introduction to 3D modeling with Blender</li>
-                        <li>Design principles for 3D printing</li>
-                        <li>Creating virtual environments with Spatial</li>
-                        <li>Applications of 3D printing and VR in STEM education</li>
-                    </ul>
-                    <p><strong>Project:</strong> Design a virtual classroom in Spatial.</p>
-                </li>
-            </ul>
-        </section>
-        <section>
-            <h2>Course Deliverables</h2>
-            <div class="deliverables">
-                <ul>
-                    <li><strong>Projects:</strong> Complete four hands-on projects (one for each topic).</li>
-                    <li><strong>Reflection:</strong> Write reflections on how these tools can be used in classrooms.</li>
-                    <li><strong>Final Portfolio:</strong> Compile all projects, code, and designs into a final portfolio.</li>
-                </ul>
-            </div>
-        </section>
-    </div>
-    <footer>
-        &copy; 2024 MEDD 8999 | Master of Education Program
-    </footer>
+<h1>Hello World</h1>
+<div id="position_demo"></div>
+    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.0.0-beta.4/libs/cn/index.js"></script>
+    <script>
+    const cozeWebSDK = new CozeWebSDK.WebChatClient({
+  config: {
+      // Agent ID
+    botId: '742477211246629****',
+  },
+  auth:  {
+      // Authentication methods, the default type is 'unauth', which means no authentication is required; it is recommended to set it to 'token', indicating authentication through PAT (Personal Access Token) or OAuth.
+    type: 'token',    
+     // When the type is set to 'token', it is necessary to configure a PAT (Personal Access Token) or OAuth access token for authentication.
+    token: 'pat_82GrrdfNWPMnlcY58r98Rzqiev2s5NyrqCR8Ypbh5hOomzZN4ivb325PZAd****',
+    // When the access token expires, use a new token and set it as needed.
+    onRefreshToken: () => 'pat_82GrrdfNWPMnlcY58r98Rzqiev2s5NyrqCR8Ypbh5hOomzZN4ivb325PZAdZ****',
+  },ui:{
+      chatBot: {
+        title: "Intelligent Customer Service",
+        uploadable: true
+      }}
+});
+</script>
 </body>
 </html>
