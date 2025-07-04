@@ -13,26 +13,23 @@
 <body>
 <h1>COZE Test</h1>
 <div id="position_demo"></div>
-    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.0.0-beta.4/libs/cn/index.js"></script>
-    <script>
-    const cozeWebSDK = new CozeWebSDK.WebChatClient({
-  config: {
-      // Agent ID
-    botId: '7523249783202119697',
-  },
-  auth:  {
-      // Authentication methods, the default type is 'unauth', which means no authentication is required; it is recommended to set it to 'token', indicating authentication through PAT (Personal Access Token) or OAuth.
-    type: 'unauth',    
-     // When the type is set to 'token', it is necessary to configure a PAT (Personal Access Token) or OAuth access token for authentication.
-    token: 'pat_82GrrdfNWPMnlcY58r98Rzqiev2s5NyrqCR8Ypbh5hOomzZN4ivb325PZAd****',
-    // When the access token expires, use a new token and set it as needed.
-    onRefreshToken: () => 'pat_82GrrdfNWPMnlcY58r98Rzqiev2s5NyrqCR8Ypbh5hOomzZN4ivb325PZAdZ****',
-  },ui:{
-      chatBot: {
-        title: "Paco Bot",
-        uploadable: true
-      }}
-});
+   <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/oversea/index.js"></script>
+<script>
+  new CozeWebSDK.WebChatClient({
+    config: {
+      bot_id: '7523249783202119697',
+    },
+    componentProps: {
+      title: 'Coze',
+    },
+    auth: {
+      type: 'token',
+      token: 'pat_********',
+      onRefreshToken: function () {
+        return 'pat_********'
+      }
+    }
+  });
 </script>
 </body>
 </html>
